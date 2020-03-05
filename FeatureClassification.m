@@ -27,12 +27,7 @@ for i = 1:60
     result=reshape(result,[64 43*16]);
     newrh{i} = result;
 end
-A1 = cell2mat(newrh);
-X = [A;A1];
-Y = zeros(size(A, 2)+size(A1, 2), 1);
-Y(1:size(A,2))=1;
-Y(size(A,2)+1:end)=2;
-out = fsFisher(X, Y);
+
 
 %[pxx,f] = pwelch(lhsamples{22}(50,:,1),512,0,512,fs);
 %figure;
