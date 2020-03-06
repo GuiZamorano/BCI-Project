@@ -1,5 +1,5 @@
 function plotTopFeatures(fisher)
-    labelsForPlotting = strings(length(fisher.fList));
+    labelsForPlotting = strings(1, length(fisher.fList));
     k = 1;
     for i = 1:37
         for j = 1:16

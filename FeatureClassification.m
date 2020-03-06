@@ -9,9 +9,9 @@ fs = h1.EVENT.SampleRate;
 [lh, rh, bf] = separateTYP(h, s);
 Hd = fildes;
 [lhsamples, rhsamples, lhfilsp, rhfilsp] = getsamples(lh, rh, fs, Hd.Numerator);
-[lhfreqsamples, rhfreqsamples] = getfreqSamples(lhsamples, rhsamples, fs);
-[X,Y] = getXYMatrix(lhfreqsamples, rhfreqsamples);
-fisher = fsFisher(X, Y);
+%[lhfreqsamples, rhfreqsamples] = getfreqSamples(lhsamples, rhsamples, fs);
+%[X,Y] = getXYMatrix(lhfreqsamples, rhfreqsamples);
+%fisher = fsFisher(X, Y);
 %plotTopFeatures(fisher);
 %plotGrandAverages(fisher, lhfreqsamples, rhfreqsamples);
 

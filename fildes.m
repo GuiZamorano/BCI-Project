@@ -10,10 +10,10 @@ function Hd = fildes
 % All frequency values are in Hz.
 Fs = 512;  % Sampling Frequency
 
-Fstop1 = 3;               % First Stopband Frequency
+Fstop1 = 2;               % First Stopband Frequency
 Fpass1 = 4;               % First Passband Frequency
-Fpass2 = 40;              % Second Passband Frequency
-Fstop2 = 41;              % Second Stopband Frequency
+Fpass2 = 46;              % Second Passband Frequency
+Fstop2 = 48;              % Second Stopband Frequency
 Dstop1 = 0.001;           % First Stopband Attenuation
 Dpass  = 0.057501127785;  % Passband Ripple
 Dstop2 = 0.0001;          % Second Stopband Attenuation

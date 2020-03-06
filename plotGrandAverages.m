@@ -12,6 +12,9 @@ function plotGrandAverages(fisher, lhsamples, rhsamples)
     top5Chan = [];
     while length(top5Chan)<5
         chan = mod(fisher.fList(featIdx),16);
+        if chan == 0
+            chan = 16;
+        end
         if ~ismember(chan, top5Chan)
             top5Chan(chanIdx) = chan;
             chanIdx = chanIdx +1;
@@ -21,30 +24,15 @@ function plotGrandAverages(fisher, lhsamples, rhsamples)
     
 
     for i = 1:5
-        [pxx,f] = pwelch(A(:,top5Chan(i)),512,0,512,512);
+        [pxx,f] = pwelch(A(:,top5Chan(i)),chebwin(512),0,512,512);
         figure;
         plot(f(5:41),10*log10(pxx(5:41)));
         title("Left/Right Hand Grand Average Channel: " + top5Chan(i));
         xlabel('Frequency (Hz)');
         ylabel('PSD');
-        [pxx,f] = pwelch(B(:,top5Chan(i)), 512, 0, 512, 512);
+        [pxx,f] = pwelch(B(:,top5Chan(i)), chebwin(512), 0, 512, 512);
         hold on;
         plot(f(5:41),10*log10(pxx(5:41)));
-        %{
-        [pxx,f] = pwelch(lh(:,top5Chan(i)), [], [], [], 512);
-        figure;
-        fourHz = find(abs(f-4) < 0.001);
-        fourtysixHz = find(abs(f-46) < 0.001);
-        plot(f(fourHz:fourtysixHz),10*log10(pxx(fourHz:fourtysixHz)));
-        title("Left/Right Hand Grand Average Channel: " + top5Chan(i));
-        xlabel('Frequency (Hz)');
-        ylabel('PSD');
-        [pxx,f] = pwelch(rh(:,top5Chan(i)), [], [], [], 512);
-        fourHz = find(abs(f-4) < 0.001);
-        fourtysixHz = find(abs(f-46) < 0.001);
-        hold on;
-        plot(f(fourHz:fourtysixHz),10*log10(pxx(fourHz:fourtysixHz)));
-        %}
     end
 end
 
