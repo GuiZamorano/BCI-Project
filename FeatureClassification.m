@@ -8,25 +8,13 @@ s = [s_1;s_2;s_3;s_4];
 fs = h1.EVENT.SampleRate;
 [lh, rh, bf] = separateTYP(h, s);
 Hd = fildes;
-[lhsamples, rhsamples] = getsamples(lh, rh, fs, Hd.Numerator);
+[lhsamples, rhsamples, lhfilsp, rhfilsp] = getsamples(lh, rh, fs, Hd.Numerator);
 [lhfreqsamples, rhfreqsamples] = getfreqSamples(lhsamples, rhsamples, fs);
+[X,Y] = getXYMatrix(lhfreqsamples, rhfreqsamples);
+fisher = fsFisher(X, Y);
+%plotTopFeatures(fisher);
+%plotGrandAverages(fisher, lhfreqsamples, rhfreqsamples);
 
-
-
-newlh = cell(60, 1);
-for i = 1:60
-    result= permute(lhfreqsamples{i},[2 1 3]);
-    result=reshape(result,[64 43*16]);
-    newlh{i} = result;
-end
-A = cell2mat(newlh);
-
-newrh = cell(60, 1);
-for i = 1:60
-    result= permute(rhfreqsamples{i},[2 1 3]);
-    result=reshape(result,[64 43*16]);
-    newrh{i} = result;
-end
 
 
 %[pxx,f] = pwelch(lhsamples{22}(50,:,1),512,0,512,fs);

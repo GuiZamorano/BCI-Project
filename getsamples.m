@@ -1,4 +1,4 @@
-function [lhsamples, rhsamples] = getsamples(lh, rh, fs, Num)
+function [lhsamples, rhsamples, lhfilsp, rhfilsp] = getsamples(lh, rh, fs, Num)
 
     lhfil = cell(size(lh,1), 1);
     for i = 1:size(lhfil, 1)
