@@ -8,12 +8,15 @@ s = [s_1;s_2;s_3;s_4];
 fs = h1.EVENT.SampleRate;
 [lh, rh, bf] = separateTYP(h, s);
 Hd = fildes;
-[lhsamples, rhsamples, lhfilsp, rhfilsp] = getsamples(lh, rh, fs, Hd.Numerator);
-%[lhfreqsamples, rhfreqsamples] = getfreqSamples(lhsamples, rhsamples, fs);
-%[X,Y] = getXYMatrix(lhfreqsamples, rhfreqsamples);
+[lhsamples, rhsamples] = getsamples(lh, rh, fs, Hd.Numerator);
+[lhfreqsamples, rhfreqsamples] = getfreqSamplesfft(lhsamples, rhsamples, fs);
+[X,Y] = getXYMatrix(lhfreqsamples, rhfreqsamples);
 %fisher = fsFisher(X, Y);
-%plotTopFeatures(fisher);
-%plotGrandAverages(fisher, lhfreqsamples, rhfreqsamples);
+%[ranking,a] = spider_wrapper(X,Y,592,'fisher');
+%rf.fList = a.rank;
+%rf.W = a.w;
+%plotTopFeatures(rf);
+%plotGrandAverages(rf, lhsamples, rhsamples);
 
 
 

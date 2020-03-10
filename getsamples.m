@@ -1,18 +1,18 @@
-function [lhsamples, rhsamples, lhfilsp, rhfilsp] = getsamples(lh, rh, fs, Num)
+function [lhsamples, rhsamples] = getsamples(lh, rh, fs, Num)
     mat = load('chanlocs16.mat');
     lhfil = cell(size(lh,1), 1);
     for i = 1:size(lhfil, 1)
         lhfil{i} = filter(Num, 1, lh{i}(:,1:16));
     end
-
+    
     %[W, label] = spatialfilter(lhfil{1}, "CAR");
     lhfilsp = cell(size(lhfil, 1), 1);
     %W = W(:, 1:16);
     for i = 1:size(lhfilsp, 1)
         %lhfilsp{i} = W*lhfil{i}';
-        lhfilsp{i} = laplacian_perrinX(lh{i}(:, 1:16)', [mat.chanlocs16.X], [mat.chanlocs16.Y], [mat.chanlocs16.Z]);
+        lhfilsp{i} = laplacian_perrinX(lhfil{i}(:, 1:16)', [mat.chanlocs16.X], [mat.chanlocs16.Y], [mat.chanlocs16.Z]);
     end
-
+    
     rhfil = cell(size(rh, 1), 1);
     for i = 1:size(rhfil, 1)
         rhfil{i} = filter(Num, 1, rh{i}(:,1:16));
@@ -20,7 +20,7 @@ function [lhsamples, rhsamples, lhfilsp, rhfilsp] = getsamples(lh, rh, fs, Num)
     rhfilsp = cell(size(rhfil, 1), 1);
     for i = 1:size(rhfilsp, 1)
         %rhfilsp{i} = W*rhfil{i}';
-        rhfilsp{i} = laplacian_perrinX(rh{i}(:, 1:16)', [mat.chanlocs16.X], [mat.chanlocs16.Y], [mat.chanlocs16.Z]);
+        rhfilsp{i} = laplacian_perrinX(rhfil{i}(:, 1:16)', [mat.chanlocs16.X], [mat.chanlocs16.Y], [mat.chanlocs16.Z]);
     end
 
     for i = 1:size(lhfilsp, 1)
@@ -29,7 +29,8 @@ function [lhsamples, rhsamples, lhfilsp, rhfilsp] = getsamples(lh, rh, fs, Num)
     for i = 1:size(rhfilsp, 1)
     rhfilsp{i} = rhfilsp{i}';
     end
-
+    
+    
     temp = [];
     lhsamples = cell(size(lhfilsp, 1), 1);
     rhsamples = cell(size(rhfilsp, 1), 1);

@@ -6,7 +6,7 @@ function plotGrandAverages1(fisher, lhfreqsamples, rhfreqsamples)
     end
     A = cell2mat(newlh);
     A = mean(A, 1);
-    A = reshape(A, [16 37]);
+    A = reshape(A, [16 43]);
    
     newrh = cell(size(rhfreqsamples, 1), 1);
     for i = 1:size(rhfreqsamples, 1)
@@ -15,7 +15,7 @@ function plotGrandAverages1(fisher, lhfreqsamples, rhfreqsamples)
     end
     B = cell2mat(newrh);
     B = mean(B, 1);
-    B = reshape(B, [16 37]);
+    B = reshape(B, [16 43]);
     
     featIdx = 1;
     chanIdx = 1;
@@ -34,7 +34,7 @@ function plotGrandAverages1(fisher, lhfreqsamples, rhfreqsamples)
     
 
     for i = 1:5
-        xaxis = [4:40];
+        xaxis = [4:46];
         figure;
         plot(xaxis, 10*log10(A(top5Chan(i),:)))
         hold on;

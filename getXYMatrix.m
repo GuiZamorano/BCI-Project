@@ -19,4 +19,4 @@ function [X, Y] = getXYMatrix(lhfreqsamples, rhfreqsamples)
     X = [A;A1];
     Y = zeros(size(A, 1)+size(A1, 1), 1);
     Y(1:size(A,1))=1;
-    Y(size(A,1)+1:end)=2;
+    Y(size(A,1)+1:end)=-1;

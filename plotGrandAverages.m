@@ -25,14 +25,20 @@ function plotGrandAverages(fisher, lhsamples, rhsamples)
 
     for i = 1:5
         [pxx,f] = pwelch(A(:,top5Chan(i)),chebwin(512),0,512,512);
+        %psdest = psd(spectrum.periodogram,A(:,top5Chan(i)),'Fs',512,'NFFT',512);
+  
         figure;
-        plot(f(5:41),10*log10(pxx(5:41)));
+        %plot(psdest.Frequencies(5:41), 10*log10(psdest.Data(5:41)), 'r')
+        plot(f(5:47),10*log10(pxx(5:47)));
         title("Left/Right Hand Grand Average Channel: " + top5Chan(i));
         xlabel('Frequency (Hz)');
         ylabel('PSD');
         [pxx,f] = pwelch(B(:,top5Chan(i)), chebwin(512), 0, 512, 512);
+        %psdest = psd(spectrum.periodogram,B(:,top5Chan(i)),'Fs',512,'NFFT',512);
         hold on;
-        plot(f(5:41),10*log10(pxx(5:41)));
+        %plot(psdest.Frequencies(5:41), 10*log10(psdest.Data(5:41)), 'b')
+        plot(f(5:47),10*log10(pxx(5:47)));
+        legend("Left Hand", "Right Hand");
     end
 end
 
