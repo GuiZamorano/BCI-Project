@@ -20,14 +20,15 @@ function plotGrandAverages3(fisher, lhsamples, rhsamples, topo)
     end
     
 
-    for i = 1:5
+    for i = 1:1
         figure;
         [pxx,f] = pwelch(A(:,:),chebwin(512),0,512,512);
         topo2(pxx(top5Freq(i)+1,:), topo);
+        title("Left Hand Frequency: " + top5Freq(i));
         figure;
         [pxx,f] = pwelch(B(:,:),chebwin(512),0,512,512);
         topo2(pxx(top5Freq(i)+1,:), topo);
-
+        title("Right Hand Frequency: " + top5Freq(i));
     end
 end
 

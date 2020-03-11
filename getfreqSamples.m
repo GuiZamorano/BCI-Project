@@ -1,11 +1,11 @@
 function [lhfreqsamples, rhfreqsamples] = getfreqSamples(lhsamples, rhsamples, fs)
     lhfreqsamples = cell (size(lhsamples, 1), 1);
     for i = 1:size(lhsamples, 1)
-        temp = zeros(size(lhsamples{i}, 3), size(lhsamples, 1), 37);
+        temp = zeros(size(lhsamples{i}, 3), size(lhsamples{i}, 1), 43);
         for j = 1:size(lhsamples{i}, 3)
-            for k = 1:size(lhsamples{1}, 1)
+            for k = 1:size(lhsamples{i}, 1)
                 [pxx,~] = pwelch(lhsamples{i}(k,:,j),fs,0,fs,fs);
-                lhfreq = pxx(5:41);
+                lhfreq = pxx(5:47);
                 temp(j, k, :) = lhfreq;
             end
         end
@@ -14,11 +14,11 @@ function [lhfreqsamples, rhfreqsamples] = getfreqSamples(lhsamples, rhsamples, f
     rhfreqsamples = cell (size(rhsamples, 1), 1);
     
     for i = 1:size(rhsamples, 1)
-        temp = zeros(size(rhsamples{i}, 3), size(rhsamples, 1), 37);
+        temp = zeros(size(rhsamples{i}, 3), size(rhsamples{i}, 1), 43);
         for j = 1:size(rhsamples{i}, 3)
-            for k = 1:size(rhsamples{1}, 1)
+            for k = 1:size(rhsamples{i}, 1)
                 [pxx,~] = pwelch(rhsamples{i}(k,:,j),512,0,512,fs);
-                rhfreq = pxx(5:41);
+                rhfreq = pxx(5:47);
                 temp(j, k, :) = rhfreq;
             end
         end

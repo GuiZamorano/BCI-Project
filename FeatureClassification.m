@@ -1,3 +1,5 @@
+load('chanlocs16.mat');
+topo.ELEC.XYZ = [chanlocs16.X; chanlocs16.Y; chanlocs16.Z]';
 [s1,h1]=sload('MITrainingCorrect/ES31OS/Offline/ES31OS.20121106.141910.offline.mi.mi_rlbf.gdf');
 [s2,h2]=sload('MITrainingCorrect/ES31OS/Offline/ES31OS.20121106.143215.offline.mi.mi_rlbf.gdf');
 [s3,h3]=sload('MITrainingCorrect/ES31OS/Offline/ES31OS.20121106.145043.offline.mi.mi_rlbf.gdf');
@@ -17,12 +19,3 @@ Hd = fildes;
 %rf.W = a.w;
 %plotTopFeatures(rf);
 %plotGrandAverages(rf, lhsamples, rhsamples);
-
-
-
-%[pxx,f] = pwelch(lhsamples{22}(50,:,1),512,0,512,fs);
-%figure;
-%plot(f(5:47),10*log10(pxx(5:47)))
-%[pxx1,f1] = pwelch(rhsamples{22}(50,:,1),512,0,512,fs);
-%figure;
-%plot(f1(5:47),10*log10(pxx1(5:47)))
