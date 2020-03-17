@@ -1,12 +1,4 @@
-function plotGrandAverages(fisher, lhsamples, rhsamples)
-    A = cell2mat(lhsamples);
-    A = mean(A, 1);
-    A = reshape(A, [512 16]);
-   
-    B = cell2mat(rhsamples);
-    B = mean(B, 1);
-    B = reshape(B, [512 16]);
-    
+function plotGrandAverages(fisher, A, B)
     featIdx = 1;
     chanIdx = 1;
     top5Chan = [];
@@ -30,7 +22,7 @@ function plotGrandAverages(fisher, lhsamples, rhsamples)
         figure;
         %plot(psdest.Frequencies(5:41), 10*log10(psdest.Data(5:41)), 'r')
         plot(f(5:47),10*log10(pxx(5:47)));
-        title("Left/Right Hand Grand Average Channel: " + top5Chan(i));
+        title("Both Feet/Right Hand Grand Average Channel: " + top5Chan(i));
         xlabel('Frequency (Hz)');
         ylabel('PSD');
         [pxx,f] = pwelch(B(:,top5Chan(i)), chebwin(512), 0, 512, 512);
@@ -38,7 +30,9 @@ function plotGrandAverages(fisher, lhsamples, rhsamples)
         hold on;
         %plot(psdest.Frequencies(5:41), 10*log10(psdest.Data(5:41)), 'b')
         plot(f(5:47),10*log10(pxx(5:47)));
-        legend("Left Hand", "Right Hand");
+        legend("Both Feet", "Right Hand");
+        grid on;
+        saveas(gcf, "HW2/CR09NA/S2/chan" + top5Chan(i)+ ".png");
     end
 end
 

@@ -1,12 +1,4 @@
-function plotGrandAverages3(fisher, lhsamples, rhsamples, topo)
-    A = cell2mat(lhsamples);
-    A = mean(A, 1);
-    A = reshape(A, [512 16]);
-   
-    B = cell2mat(rhsamples);
-    B = mean(B, 1);
-    B = reshape(B, [512 16]);
-    
+function plotGrandAverages3(fisher, A, B, topo)
     featIdx = 1;
     freqIdx = 1;
     top5Freq = [];
@@ -20,15 +12,19 @@ function plotGrandAverages3(fisher, lhsamples, rhsamples, topo)
     end
     
 
-    for i = 1:1
+    for i = 1:5
         figure;
         [pxx,f] = pwelch(A(:,:),chebwin(512),0,512,512);
-        topo2(pxx(top5Freq(i)+1,:), topo);
-        title("Left Hand Frequency: " + top5Freq(i));
+        topo2(mean(pxx(top5Freq(i):top5Freq(i)+2,:)), topo);
+        title("Both Feet Frequency: [" + (top5Freq(i)-1) + " - " + (top5Freq(i)+1) + "]");
+        colorbar;
+        saveas(gcf, "HW2/CR09NA/S2/freqa" + top5Freq(i)+ ".png");
         figure;
         [pxx,f] = pwelch(B(:,:),chebwin(512),0,512,512);
-        topo2(pxx(top5Freq(i)+1,:), topo);
-        title("Right Hand Frequency: " + top5Freq(i));
+        topo2(mean(pxx(top5Freq(i):top5Freq(i)+2,:)), topo);
+        title("Right Hand Frequency: [" + (top5Freq(i)-1) + " - " + (top5Freq(i)+1) + "]");
+        colorbar;
+        saveas(gcf, "HW2/CR09NA/S2/freqb" + top5Freq(i)+ ".png");
     end
 end
 

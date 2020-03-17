@@ -1,4 +1,5 @@
 function [lhsamples, rhsamples] = getsamples(lh, rh, fs, Num)
+    
     mat = load('chanlocs16.mat');
     lhfil = cell(size(lh,1), 1);
     for i = 1:size(lhfil, 1)
@@ -36,6 +37,8 @@ function [lhsamples, rhsamples] = getsamples(lh, rh, fs, Num)
     rhsamples = cell(size(rhfilsp, 1), 1);
 
     for i = 1:size(lhsamples, 1)
+        dim = floor(((length(lhfilsp{i})-512)/32)+1);
+        temp = zeros(dim, 512, 16);
         for j = 1:16
             for l = 0:32:length(lhfilsp{i})-512
                 temp((l/32)+1, :,j) = lhfilsp{i}(l+1 : 512 + l, j);
@@ -44,6 +47,8 @@ function [lhsamples, rhsamples] = getsamples(lh, rh, fs, Num)
         lhsamples{i} = temp;
     end
     for i = 1:size(rhsamples, 1)
+        dim = floor(((length(rhfilsp{i})-512)/32)+1);
+        temp = zeros(dim, 512, 16);
         for j = 1:16
             for l = 0:32:length(rhfilsp{i})-512
                 temp((l/32)+1, :,j) = rhfilsp{i}(l+1 : 512 + l, j);
