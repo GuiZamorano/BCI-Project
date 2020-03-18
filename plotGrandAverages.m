@@ -32,7 +32,7 @@ function plotGrandAverages(fisher, A, B)
         plot(f(5:47),10*log10(pxx(5:47)));
         legend("Both Feet", "Right Hand");
         grid on;
-        saveas(gcf, "HW2/CR09NA/S2/chan" + top5Chan(i)+ ".png");
+        saveas(gcf, "HW2/ES31OS/Offline/chan" + top5Chan(i)+ ".png");
     end
 end
 

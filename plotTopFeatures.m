@@ -19,7 +19,7 @@ function plotTopFeatures(fisher)
     title("Top Features");
     xlabel("Features");
     ylabel("Fisher Score");
-    saveas(gcf, 'HW2/CR09NA/S2/fig1.png');
+    saveas(gcf, 'HW2/ES31OS/Offline/fig1.png');
     
        
 
