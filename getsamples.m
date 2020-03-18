@@ -37,20 +37,30 @@ function [lhsamples, rhsamples] = getsamples(lh, rh, fs, Num)
     rhsamples = cell(size(rhfilsp, 1), 1);
 
     for i = 1:size(lhsamples, 1)
-        dim = floor(((length(lhfilsp{i})-512)/32)+1);
+        if length(lhfilsp{i}) > 6144 %only first 12 seconds if it goes longer
+            lengthOfTrial = 6144;
+        else
+            lengthOfTrial = length(lhfilsp{i});
+        end
+        dim = floor(((lengthOfTrial-512)/32)+1);
         temp = zeros(dim, 512, 16);
         for j = 1:16
-            for l = 0:32:length(lhfilsp{i})-512
+            for l = 0:32:lengthOfTrial-512
                 temp((l/32)+1, :,j) = lhfilsp{i}(l+1 : 512 + l, j);
             end
         end
         lhsamples{i} = temp;
     end
     for i = 1:size(rhsamples, 1)
-        dim = floor(((length(rhfilsp{i})-512)/32)+1);
+        if length(rhfilsp{i}) > 6144 %only first 12 seconds if it goes longer
+            lengthOfTrial = 6144;
+        else
+            lengthOfTrial = length(rhfilsp{i});
+        end
+        dim = floor(((lengthOfTrial-512)/32)+1);
         temp = zeros(dim, 512, 16);
         for j = 1:16
-            for l = 0:32:length(rhfilsp{i})-512
+            for l = 0:32:lengthOfTrial-512
                 temp((l/32)+1, :,j) = rhfilsp{i}(l+1 : 512 + l, j);
             end
         end
