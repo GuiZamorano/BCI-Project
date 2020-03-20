@@ -66,4 +66,6 @@ function [lhsamples, rhsamples] = getsamples(lh, rh, fs, Num)
         end
         rhsamples{i} = temp;
     end
+    lhsamples = lhsamples(~cellfun('isempty',lhsamples));
+    rhsamples = rhsamples(~cellfun('isempty',rhsamples));
 end
