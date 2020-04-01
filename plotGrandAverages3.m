@@ -17,16 +17,16 @@ function plotGrandAverages3(fisher, A, B, topo)
         [pxx,f] = pwelch(A(:,:),chebwin(512),0,512,512);
         %topo2(mean(pxx(top5Freq(i):top5Freq(i)+2,:)), topo);
         topoplot(mean(pxx(top5Freq(i):top5Freq(i)+2,:)), 'chanlocs16.loc');   
-        title("Both Feet Frequency: [" + (top5Freq(i)-1) + " - " + (top5Freq(i)+1) + "]");
+        title("Left Hand Frequency: [" + (top5Freq(i)-1) + " - " + (top5Freq(i)+1) + "]");
         colorbar;
-        saveas(gcf, "HW2/ES31OS/Offline/freqa" + top5Freq(i)+ ".png");
+        saveas(gcf, "HW2/MA29ON/S3/freqa" + top5Freq(i)+ ".png");
         figure;
         [pxx,f] = pwelch(B(:,:),chebwin(512),0,512,512);
         %topo2(mean(pxx(top5Freq(i):top5Freq(i)+2,:)), topo);
         topoplot(mean(pxx(top5Freq(i):top5Freq(i)+2,:)), 'chanlocs16.loc');
-        title("Right Hand Frequency: [" + (top5Freq(i)-1) + " - " + (top5Freq(i)+1) + "]");
+        title("Both Feet Frequency: [" + (top5Freq(i)-1) + " - " + (top5Freq(i)+1) + "]");
         colorbar;
-        saveas(gcf, "HW2/ES31OS/Offline/freqb" + top5Freq(i)+ ".png");
+        saveas(gcf, "HW2/MA29ON/S3/freqb" + top5Freq(i)+ ".png");
     end
 end
 

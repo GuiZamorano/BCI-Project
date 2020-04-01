@@ -22,7 +22,7 @@ function plotGrandAverages(fisher, A, B)
         figure;
         %plot(psdest.Frequencies(5:41), 10*log10(psdest.Data(5:41)), 'r')
         plot(f(5:47),10*log10(pxx(5:47)));
-        title("Both Feet/Right Hand Grand Average Channel: " + top5Chan(i));
+        title("Left Hand/Both Feet Grand Average Channel: " + top5Chan(i));
         xlabel('Frequency (Hz)');
         ylabel('PSD');
         [pxx,f] = pwelch(B(:,top5Chan(i)), chebwin(512), 0, 512, 512);
@@ -30,9 +30,9 @@ function plotGrandAverages(fisher, A, B)
         hold on;
         %plot(psdest.Frequencies(5:41), 10*log10(psdest.Data(5:41)), 'b')
         plot(f(5:47),10*log10(pxx(5:47)));
-        legend("Both Feet", "Right Hand");
+        legend("Left Hand", "Both Feet");
         grid on;
-        saveas(gcf, "HW2/ES31OS/Offline/chan" + top5Chan(i)+ ".png");
+        saveas(gcf, "HW2/MA29ON/S3/chan" + top5Chan(i)+ ".png");
     end
 end
 
